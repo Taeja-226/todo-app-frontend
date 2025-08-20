@@ -1,0 +1,54 @@
+import axios from 'axios'
+
+const host ='http://localhost:3000'
+
+async function callCreateAPI(apiPath,body){
+    return await axios.post(host + apiPath, body)
+    .then(response => {
+        console.log(`callCreateAPI response ${JSON.stringify(response.data)}`);
+        return response.data;
+    })
+    .catch(error => {
+        alert(`api call got failed , error ${error}`);
+        return null;
+    })
+
+
+}
+
+async function callGetALLAPI(apiPath){
+    return await axios.get(host + apiPath)
+    .then(response => {
+        console.log(`callGetALLAPI response ${JSON.stringify(response.body)}`)
+        return response.data
+    })
+    .catch(error =>{
+        alert(`CallALLAPI call got failed , error ${error}`)
+    })
+}
+
+
+async function callGetAPI(apiPath , params){
+    return await axios.get(host + apiPath , {'params' : params})
+    .then(response=> {
+        console.log(`callGetAPI response ${JSON.stringify(response.data)}`)
+        return response.data
+    })
+    .catch(error =>{
+        alert(`callGetAPI call got failed , error ${error}`)
+    })
+}
+
+
+async function callUpdateAPI(apiPath, body, params){
+    return await axios.patch(host + apiPath , body, {'params' : params})
+    .then(response => {
+        console.log(`callUpdateAPI response ${JSON.stringify(response.data)}`)
+        return response.data;
+    })
+    .catch(error =>{
+         alert(`callUpdateAPI call got failed , error ${error}`)
+    })
+}
+
+export {callCreateAPI, callGetALLAPI, callGetAPI, callUpdateAPI}
